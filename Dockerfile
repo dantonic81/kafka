@@ -21,7 +21,7 @@ EXPOSE 9092
 
 # Entrypoint script to run both Kafka and the Python consumer
 COPY entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh && ls -l /app/entrypoint.sh
 
 # Use the custom entrypoint
 CMD ["/app/entrypoint.sh"]
