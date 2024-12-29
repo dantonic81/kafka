@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Set permissions for the entrypoint script just in case
-chmod +x /app/entrypoint.sh
+# Set lower memory limits for Kafka
+export KAFKA_HEAP_OPTS="-Xmx256m -Xms128m"  # Adjust this based on available memory
 
 # Initialize Kafka data directory if needed
 if [ ! -f /opt/bitnami/kafka/data/meta.properties ]; then
@@ -18,3 +18,4 @@ sleep 10
 
 echo "Starting Python consumer..."
 python3 /app/consumer.py
+
