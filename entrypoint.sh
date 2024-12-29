@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# Set permissions for the entrypoint script just in case
+chmod +x /app/entrypoint.sh
+
 # Initialize Kafka data directory if needed
 if [ ! -f /opt/bitnami/kafka/data/meta.properties ]; then
     echo "Initializing Kafka data directory..."
