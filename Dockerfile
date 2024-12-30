@@ -14,6 +14,7 @@ ENV PATH="/app/venv/bin:$PATH"
 WORKDIR /app
 
 # Copy your Python application files
+COPY utils /app/utils
 COPY consumer.py /app/consumer.py
 
 # Expose Kafka and app ports
