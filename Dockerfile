@@ -13,6 +13,12 @@ ENV PATH="/app/venv/bin:$PATH"
 # Create a directory for the app
 WORKDIR /app
 
+# Copy the requirements.txt file
+COPY requirements.txt /app/requirements.txt
+
+# Install dependencies from requirements.txt
+RUN /app/venv/bin/pip install -r /app/requirements.txt
+
 # Copy your Python application files
 COPY utils /app/utils
 COPY consumer.py /app/consumer.py
