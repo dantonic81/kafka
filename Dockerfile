@@ -19,9 +19,9 @@ COPY requirements.txt /app/requirements.txt
 # Install dependencies from requirements.txt
 RUN /app/venv/bin/pip install -r /app/requirements.txt
 
-# Copy your Python application files
-COPY utils /app/utils
-COPY consumer.py /app/consumer.py
+## Copy your Python application files
+#COPY utils /app/utils
+#COPY consumer.py /app/consumer.py
 
 # Expose Kafka and app ports
 EXPOSE 9092

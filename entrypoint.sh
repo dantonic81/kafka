@@ -23,7 +23,5 @@ echo "Starting Kafka..."
 kafka-server-start.sh /opt/bitnami/kafka/config/kraft/server.properties &
 
 echo "Waiting for Kafka to start..."
-sleep 10
+sleep 30
 
-echo "Starting Python consumer..."
-python3 /app/consumer.py
