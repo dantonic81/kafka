@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Default to Koyeb's URL if not set
+export KAFKA_ADVERTISED_LISTENERS="${KAFKA_ADVERTISED_LISTENERS:-PLAINTEXT://lovely-candice-acmetest-e2699be0.koyeb.app:9092}"
+export KAFKA_LISTENERS="${KAFKA_LISTENERS:-PLAINTEXT://0.0.0.0:9092}"
+
 # Set lower memory limits for Kafka
 export KAFKA_HEAP_OPTS="-Xmx256m -Xms128m"  # Adjust this based on available memory
 
@@ -10,17 +14,16 @@ if [ ! -f /opt/bitnami/kafka/data/meta.properties ]; then
     kafka-storage.sh format --config /opt/bitnami/kafka/config/kraft/server.properties --cluster-id "$CLUSTER_ID"
 fi
 
+# Set Kafka configuration dynamically
+echo "Configuring Kafka listeners..."
+echo "listeners=$KAFKA_LISTENERS" >> /opt/bitnami/kafka/config/server.properties
+echo "advertised.listeners=$KAFKA_ADVERTISED_LISTENERS" >> /opt/bitnami/kafka/config/server.properties
+
 echo "Starting Kafka..."
 kafka-server-start.sh /opt/bitnami/kafka/config/kraft/server.properties &
 
-# Wait until Kafka is fully ready to accept connections
 echo "Waiting for Kafka to start..."
-until nc -z localhost 9092; do
-  echo "Waiting for Kafka to become available..."
-  sleep 5
-done
-
-echo "Kafka is up and running!"
+sleep 10
 
 echo "Starting Python consumer..."
 python3 /app/consumer.py
