@@ -13,9 +13,14 @@ fi
 echo "Starting Kafka..."
 kafka-server-start.sh /opt/bitnami/kafka/config/kraft/server.properties &
 
+# Wait until Kafka is fully ready to accept connections
 echo "Waiting for Kafka to start..."
-sleep 10
+until nc -z localhost 9092; do
+  echo "Waiting for Kafka to become available..."
+  sleep 5
+done
+
+echo "Kafka is up and running!"
 
 echo "Starting Python consumer..."
 python3 /app/consumer.py
-
