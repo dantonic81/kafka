@@ -20,8 +20,4 @@ echo "listeners=$KAFKA_LISTENERS" >> /opt/bitnami/kafka/config/server.properties
 echo "advertised.listeners=$KAFKA_ADVERTISED_LISTENERS" >> /opt/bitnami/kafka/config/server.properties
 
 echo "Starting Kafka..."
-kafka-server-start.sh /opt/bitnami/kafka/config/kraft/server.properties &
-
-echo "Waiting for Kafka to start..."
-sleep 30
-
+exec kafka-server-start.sh /opt/bitnami/kafka/config/kraft/server.properties
