@@ -3,7 +3,7 @@ FROM bitnami/kafka:latest
 
 # Install Python and dependencies
 USER root
-RUN apt-get update && apt-get install -y python3 python3-pip python3-venv nano && \
+RUN apt-get update && apt-get install -y python3 python3-pip python3-venv nano git && \
     python3 -m venv /app/venv && \
     /app/venv/bin/pip install kafka-python
 
