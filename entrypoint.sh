@@ -5,7 +5,7 @@
 #export KAFKA_LISTENERS="${KAFKA_LISTENERS:-PLAINTEXT://0.0.0.0:9092}"
 
 # Set lower memory limits for Kafka
-export KAFKA_HEAP_OPTS="-Xmx512m -Xms256m"  # Adjust this based on available memory
+export KAFKA_HEAP_OPTS="-Xmx384m -Xms256m"  # Adjust this based on available memory
 
 # Initialize Kafka data directory if needed
 if [ ! -f /opt/bitnami/kafka/data/meta.properties ]; then
