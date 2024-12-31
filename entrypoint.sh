@@ -16,8 +16,8 @@ fi
 
 # Set Kafka configuration dynamically
 echo "Configuring Kafka listeners..."
-echo "listeners=$KAFKA_LISTENERS" >> /opt/bitnami/kafka/config/server.properties
-echo "advertised.listeners=$KAFKA_ADVERTISED_LISTENERS" >> /opt/bitnami/kafka/config/server.properties
+echo "listeners=$KAFKA_LISTENERS" >> /opt/bitnami/kafka/config/kraft/server.properties
+echo "advertised.listeners=$KAFKA_ADVERTISED_LISTENERS" >> /opt/bitnami/kafka/config/kraft/server.properties
 
 echo "Starting Kafka..."
 exec kafka-server-start.sh /opt/bitnami/kafka/config/kraft/server.properties
