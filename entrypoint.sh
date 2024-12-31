@@ -16,8 +16,12 @@ fi
 
 # Set Kafka configuration dynamically
 echo "Configuring Kafka listeners..."
-echo "listeners=$KAFKA_LISTENERS" >> /opt/bitnami/kafka/config/kraft/server.properties
-echo "advertised.listeners=$KAFKA_ADVERTISED_LISTENERS" >> /opt/bitnami/kafka/config/kraft/server.properties
+echo "controller.listener.names=CONTROLLER" >> /opt/bitnami/kafka/config/kraft/server.properties
+echo "listeners=PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093" >> /opt/bitnami/kafka/config/kraft/server.properties
+echo "advertised.listeners=PLAINTEXT://lovely-candice-acmetest-e2699be0.koyeb.app:9092,CONTROLLER://localhost:9093" >> /opt/bitnami/kafka/config/kraft/server.properties
+
+echo "Verifying controller.listener.names and listeners in server.properties:"
+cat /opt/bitnami/kafka/config/kraft/server.properties | grep -E "listeners|controller.listener.names"
 
 echo "Starting Kafka..."
 exec kafka-server-start.sh /opt/bitnami/kafka/config/kraft/server.properties
