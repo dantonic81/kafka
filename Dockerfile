@@ -11,7 +11,7 @@ ENV KAFKA_REST_ADVERTISED_LISTENERS=http://kafka-rest:8082
 ENV KAFKA_REST_KAFKA_CLUSTER_ID=my-cluster
 
 # Set JVM options to limit memory usage
-ENV KAFKA_HEAP_OPTS="-Xmx512M -Xms512M"
+ENV KAFKA_HEAP_OPTS="-Xmx384M -Xms384M"
 
 # Expose Kafka and REST Proxy ports
 EXPOSE 9092
