@@ -15,4 +15,4 @@ EXPOSE 9092
 EXPOSE 8082
 
 # Start Kafka and the REST Proxy
-CMD ["sh", "-c", "/opt/bitnami/scripts/kafka/entrypoint.sh /opt/bitnami/kafka/bin/kafka-server-start.sh /opt/bitnami/kafka/config/server.properties & /etc/confluent/docker/run"]
+CMD ["/opt/bitnami/scripts/kafka/entrypoint.sh", "/opt/bitnami/kafka/bin/kafka-server-start.sh", "/opt/bitnami/kafka/config/server.properties"]
