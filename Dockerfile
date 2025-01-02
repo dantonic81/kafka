@@ -18,5 +18,5 @@ ENV KAFKA_REST_KAFKA_CLUSTER_ID=my-cluster
 EXPOSE 9092
 EXPOSE 8082
 
-# Start Kafka in KRaft mode and REST Proxy
-CMD ["sh", "-c", "kafka-server-start.sh /etc/kafka/kraft/server.properties & start /etc/confluent/docker/config/kafka-rest.properties"]
+# Start Kafka in KRaft mode and the REST Proxy
+CMD /bin/bash -c "kafka-server-start.sh /etc/kafka/kraft/server.properties & /etc/confluent/docker/run"
