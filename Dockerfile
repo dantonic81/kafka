@@ -14,9 +14,9 @@ ENV ALLOW_PLAINTEXT_LISTENER=yes
 RUN apt-get update && apt-get install -y wget unzip
 
 # Install Kafka REST Proxy version 7.8.0 from Confluent
-RUN wget https://github.com/confluentinc/kafka-rest/releases/download/v7.8.0/kafka-rest-7.8.0.tar.gz \
-    && tar -xzf kafka-rest-7.8.0.tar.gz \
-    && mv kafka-rest-7.8.0 /opt/kafka-rest
+RUN wget https://github.com/confluentinc/kafka-rest-images/releases/download/v7.9.0-26/kafka-rest-images-7.9.0-26.tar.gz \
+    && tar -xzf kafka-rest-images-7.9.0-26.tar.gz \
+    && mv kafka-rest-images-7.9.0-26 /opt/kafka-rest
 
 # Expose HTTP ports (Kafka REST Proxy)
 EXPOSE 8082
