@@ -1,34 +1,15 @@
-# Use the Bitnami Kafka image as the base
+# Use the Bitnami Kafka image
 FROM bitnami/kafka:latest
 
-# Install Python and dependencies
-USER root
-RUN apt-get update && apt-get install -y python3 python3-pip python3-venv nano git netcat-openbsd && \
-    python3 -m venv /app/venv && \
-    /app/venv/bin/pip install kafka-python
+# Enable Kafka in KRaft mode (no Zookeeper)
+ENV KAFKA_CFG_PROCESS_ROLES=broker
+ENV KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@0.0.0.0:9093
+ENV KAFKA_CFG_LISTENERS=PLAINTEXT://0.0.0.0:9092
+ENV KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+ENV ALLOW_PLAINTEXT_LISTENER=yes
 
-# Set environment variables for the Python app
-ENV PATH="/app/venv/bin:$PATH"
+# Expose the internal Kafka port for communication within the network (not exposed to the outside world)
+EXPOSE 9092 9093
 
-# Create a directory for the app
-WORKDIR /app
-
-# Copy the requirements.txt file
-COPY requirements.txt /app/requirements.txt
-
-# Install dependencies from requirements.txt
-RUN /app/venv/bin/pip install -r /app/requirements.txt
-
-## Copy your Python application files
-#COPY utils /app/utils
-#COPY consumer.py /app/consumer.py
-
-# Expose Kafka and app ports
-EXPOSE 9092
-
-# Entrypoint script to run both Kafka and the Python consumer
-COPY entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh && ls -l /app/entrypoint.sh
-
-# Use the custom entrypoint
-CMD ["/app/entrypoint.sh"]
+# Start Kafka in KRaft mode
+CMD ["kafka-server-start.sh", "/opt/bitnami/kafka/config/kraft/server.properties"]
